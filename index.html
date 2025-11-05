@@ -11,6 +11,10 @@
     <!-- Visualization & Content Choices: [1. Report Info (Internal Modules): Goal(Inform/Organize) -> Viz(Interactive Tabs) -> Interaction(Click tab) -> Justification(Separates PowerSchool's offerings by function, e.g., LMS, Finance) -> Method(HTML/Tailwind/JS). 2. Report Info (Interconnected Systems): Goal(Inform/Organize) -> Viz(Filterable Cards) -> Interaction(Click filter button) -> Justification(Allows user to explore third-party systems by category, matching the module categories) -> Method(HTML/Tailwind/JS). 3. Report Info (Pros/Cons of Centralization): Goal(Compare/Analyze) -> Viz(Two-column text lists & a Bar Chart) -> Interaction(View chart, read comparison) -> Justification(Directly presents the arguments for/against the two core strategies and visualizes the key trade-off) -> Library(Chart.js/Canvas). 4. Report Info (Scalability): Goal(Conclude) -> Viz(Simple text block) -> Justification(Summarizes the relevance for district-level management) -> Method(HTML).] -->
     <!-- CONFIRMATION: NO SVG graphics used. NO Mermaid JS used. -->
     <style>
+        /* Adds scroll-padding-top to account for the sticky header height */
+        html {
+            scroll-padding-top: 80px; /* Adjust this value based on your sticky header's height */
+        }
         .chart-container {
             position: relative;
             width: 100%;
@@ -25,33 +29,39 @@
                 height: 400px;
             }
         }
+        /* Style for the active tab */
         .tab-button.active {
-            border-bottom-color: #0d9488;
-            color: #0d9488;
+            border-bottom-color: #0d9488; /* teal-600 */
+            color: #0d9488; /* teal-600 */
             font-weight: 600;
         }
+        /* Style for the active filter button */
         .filter-button.active {
-            background-color: #0d9488;
+            background-color: #0d9488; /* teal-600 */
             color: white;
         }
     </style>
 </head>
 <body class="bg-gray-50 font-sans text-gray-800">
 
+    <!-- Sticky Header -->
     <header class="bg-white shadow-md sticky top-0 z-50">
         <nav class="container mx-auto px-6 py-4 flex flex-wrap justify-between items-center">
             <h1 class="text-2xl font-bold text-teal-700">PowerSchool Ecosystem Explorer</h1>
+            <!-- Navigation Links -->
             <div class="flex space-x-4 mt-4 md:mt-0">
                 <a href="#home" class="nav-link text-gray-600 hover:text-teal-600">Introduction</a>
                 <a href="#modules" class="nav-link text-gray-600 hover:text-teal-600">Internal Modules</a>
                 <a href="#interconnections" class="nav-link text-gray-600 hover:text-teal-600">Interconnections</a>
                 <a href="#decision" class="nav-link text-gray-600 hover:text-teal-600">Strategic Decision</a>
+                <a href="#report" class="nav-link text-gray-600 hover:text-teal-600">Full Report</a>
             </div>
         </nav>
     </header>
 
     <main class="container mx-auto px-6 py-12">
 
+        <!-- Section 1: Introduction -->
         <section id="home" class="mb-16 text-center">
             <h2 class="text-4xl font-bold text-gray-900 mb-4">The K-12 Operational Dilemma</h2>
             <p class="text-lg text-gray-700 max-w-3xl mx-auto">
@@ -59,15 +69,17 @@
             </p>
         </section>
 
-        <section id="modules" class="mb-16 scroll-mt-24">
+        <!-- Section 2: Internal Modules (All-in-One) -->
+        <section id="modules" class="mb-16">
             <h2 class="text-3xl font-bold text-center text-gray-900 mb-4">The "All-in-One" Path: PowerSchool's Internal Modules</h2>
             <p class="text-center text-gray-700 max-w-3xl mx-auto mb-8">
                 PowerSchool has expanded by acquiring and building a wide array of tools, creating a "Unified" platform. These are the solutions they offer to replace specialized third-party systems. Explore the main categories to see what's available "in-house."
             </p>
             
+            <!-- Interactive Tabs -->
             <div class="bg-white p-6 rounded-lg shadow-xl">
                 <div class="border-b border-gray-200 mb-6">
-                    <nav class="-mb-px flex space-x-8" aria-label="Tabs">
+                    <nav class="-mb-px flex flex-wrap space-x-8" aria-label="Tabs">
                         <button class="tab-button active whitespace-nowrap py-4 px-1 border-b-2 border-transparent font-medium text-sm text-gray-500 hover:text-gray-700 hover:border-gray-300" data-tab="lms">
                             Learning & Classroom
                         </button>
@@ -83,6 +95,7 @@
                     </nav>
                 </div>
 
+                <!-- Tab Content -->
                 <div id="lms" class="tab-content">
                     <h3 class="text-2xl font-semibold text-teal-700 mb-2">Learning & Classroom: Schoology Learning</h3>
                     <p class="text-gray-700">
@@ -110,19 +123,22 @@
             </div>
         </section>
 
-        <section id="interconnections" class="mb-16 scroll-mt-24">
+        <!-- Section 3: Interconnections (Best-of-Breed) -->
+        <section id="interconnections" class="mb-16">
             <h2 class="text-3xl font-bold text-center text-gray-900 mb-4">The "Best-of-Breed" Path: Third-Party Interconnections</h2>
             <p class="text-center text-gray-700 max-w-3xl mx-auto mb-8">
                 Alternatively, many schools connect specialized, best-in-class applications to PowerSchool. This is often managed via APIs (Application Programming Interfaces). PowerSchool maintains an ISV (Independent Software Vendor) partner program to certify these connections, but other integrations range from robust to manual.
             </p>
 
-            <div class="flex justify-center space-x-2 mb-8">
+            <!-- Filter Buttons -->
+            <div class="flex flex-wrap justify-center gap-2 mb-8">
                 <button class="filter-button active py-2 px-5 rounded-full border border-teal-600 text-teal-600" data-filter="all">All Categories</button>
                 <button class="filter-button py-2 px-5 rounded-full border border-teal-600 text-teal-600" data-filter="lms">LMS</button>
                 <button class="filter-button py-2 px-5 rounded-full border border-teal-600 text-teal-600" data-filter="finance">Finance</button>
                 <button class="filter-button py-2 px-5 rounded-full border border-teal-600 text-teal-600" data-filter="enrollment">Enrollment/CMS</button>
             </div>
 
+            <!-- Filterable Cards -->
             <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
                 <div class="system-card bg-white p-6 rounded-lg shadow-xl" data-category="finance">
                     <span class="inline-block bg-blue-100 text-blue-800 text-xs font-semibold px-2.5 py-0.5 rounded-full mb-3">Finance</span>
@@ -186,7 +202,8 @@
             </div>
         </section>
 
-        <section id="decision" class="mb-16 scroll-mt-24">
+        <!-- Section 4: Strategic Decision -->
+        <section id="decision" class="mb-16">
             <h2 class="text-3xl font-bold text-center text-gray-900 mb-4">The Strategic Decision: Centralization vs. Specialization</h2>
             <p class="text-center text-gray-700 max-w-3xl mx-auto mb-12">
                 This is the core of your research. The "All-in-One" model seems efficient for district-level management, but it has trade-offs. Here's how to think about the inefficiencies and when a separate application is more effective.
@@ -194,6 +211,7 @@
 
             <div class="grid grid-cols-1 lg:grid-cols-2 gap-12">
                 
+                <!-- Pros and Cons -->
                 <div class="bg-white p-8 rounded-lg shadow-xl">
                     <h3 class="text-2xl font-bold text-gray-900 mb-6">The Core Trade-Off</h3>
                     
@@ -214,6 +232,7 @@
                     </ul>
                 </div>
 
+                <!-- Chart.js Visualization -->
                 <div class="bg-white p-8 rounded-lg shadow-xl flex flex-col">
                     <h3 class="text-2xl font-bold text-gray-900 mb-6 text-center">Visualizing the Trade-Off</h3>
                     <p class="text-center text-gray-600 text-sm mb-4">
@@ -226,6 +245,7 @@
 
             </div>
 
+            <!-- Key Inefficiencies Analysis -->
             <div class="mt-12 bg-white p-8 rounded-lg shadow-xl border-l-4 border-teal-600">
                 <h3 class="text-2xl font-bold text-gray-900 mb-4">Key Inefficiencies & When to Separate</h3>
                 <p class="text-gray-700 mb-4">
@@ -251,15 +271,32 @@
             </div>
         </section>
 
+        <!-- Section 5: Full Report Link -->
+        <section id="report" class="mb-16 text-center">
+            <h2 class="text-3xl font-bold text-center text-gray-900 mb-4">Access the Full Research Report</h2>
+            <p class="text-center text-gray-700 max-w-3xl mx-auto mb-8">
+                Click the button below to view the complete research paper, "Analysis of the PowerSchool K-12 Ecosystem."
+            </p>
+            <a href="uploaded:PowerSchool Modules and Integrations Research.pdf" 
+               target="_blank" 
+               rel="noopener noreferrer"
+               class="inline-block bg-teal-600 text-white font-bold py-3 px-8 rounded-lg shadow-md hover:bg-teal-700 transition-colors duration-300">
+                View Full Report
+            </a>
+        </section>
+
     </main>
 
+    <!-- Footer -->
     <footer class="bg-gray-800 text-gray-300 text-center p-6 mt-16">
         <p>&copy; 2025 K-12 Operations Analysis. This is a simulated interactive report for research purposes.</p>
     </footer>
 
+    <!-- JavaScript for Interactivity -->
     <script>
         document.addEventListener('DOMContentLoaded', () => {
 
+            // Smooth scrolling for navigation links
             const navLinks = document.querySelectorAll('.nav-link');
             navLinks.forEach(link => {
                 link.addEventListener('click', (e) => {
@@ -275,13 +312,17 @@
                 });
             });
 
+            // Tab functionality
             const tabs = document.querySelectorAll('.tab-button');
             const tabContents = document.querySelectorAll('.tab-content');
             tabs.forEach(tab => {
                 tab.addEventListener('click', () => {
+                    // Deactivate all tabs
                     tabs.forEach(t => t.classList.remove('active'));
+                    // Activate clicked tab
                     tab.classList.add('active');
 
+                    // Hide all tab content
                     const targetId = tab.getAttribute('data-tab');
                     tabContents.forEach(content => {
                         if (content.id === targetId) {
@@ -293,15 +334,19 @@
                 });
             });
 
+            // Filter functionality for cards
             const filterButtons = document.querySelectorAll('.filter-button');
             const systemCards = document.querySelectorAll('.system-card');
             filterButtons.forEach(button => {
                 button.addEventListener('click', () => {
+                    // Deactivate all filter buttons
                     filterButtons.forEach(b => b.classList.remove('active'));
+                    // Activate clicked button
                     button.classList.add('active');
 
                     const filter = button.getAttribute('data-filter');
                     
+                    // Show/hide cards based on filter
                     systemCards.forEach(card => {
                         if (filter === 'all' || card.getAttribute('data-category') === filter) {
                             card.classList.remove('hidden');
@@ -312,6 +357,7 @@
                 });
             });
 
+            // Chart.js bar chart
             const ctx = document.getElementById('tradeoffChart');
             if (ctx) {
                 new Chart(ctx.getContext('2d'), {
@@ -322,13 +368,13 @@
                             {
                                 label: 'Feature Depth / Specialization',
                                 data: [65, 95],
-                                backgroundColor: '#0d9488',
+                                backgroundColor: '#0d9488', // teal-600
                                 barThickness: 50,
                             },
                             {
                                 label: 'Integration Complexity (Lower is Better)',
                                 data: [35, 75],
-                                backgroundColor: '#f0ab0a',
+                                backgroundColor: '#f0ab0a', // amber-500
                                 barThickness: 50,
                             }
                         ]
@@ -336,7 +382,7 @@
                     options: {
                         responsive: true,
                         maintainAspectRatio: false,
-                        indexAxis: 'y',
+                        indexAxis: 'y', // Create horizontal bar chart
                         scales: {
                             x: {
                                 beginAtZero: true,
@@ -365,9 +411,9 @@
                                         if (context.parsed.x !== null) {
                                             label += context.parsed.x;
                                             if (context.dataset.label.includes('Complexity')) {
-                                                label += ' (High complexity)';
-                                            } else {
-                                                label += ' (High feature depth)';
+                                                // Custom tooltip text for clarity
+                                                if(context.dataIndex === 0) label += ' (Lower complexity)';
+                                                else label += ' (Higher complexity)';
                                             }
                                         }
                                         return label;
