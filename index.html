@@ -40,6 +40,77 @@
             background-color: #0d9488; /* teal-600 */
             color: white;
         }
+
+        /* Blueprint Styles */
+        .blueprint-grid {
+            display: grid;
+            grid-template-columns: 1fr auto 1fr;
+            grid-template-rows: 1fr auto 1fr;
+            gap: 1rem;
+            align-items: center;
+            justify-items: center;
+            min-height: 350px;
+            width: 100%;
+            position: relative;
+        }
+
+        .blueprint-center { grid-area: 2 / 2 / 3 / 3; z-index: 10; }
+        .blueprint-top { grid-area: 1 / 2 / 2 / 3; z-index: 10; }
+        .blueprint-bottom { grid-area: 3 / 2 / 4 / 3; z-index: 10; }
+        .blueprint-left { grid-area: 2 / 1 / 3 / 2; z-index: 10; }
+        .blueprint-right { grid-area: 2 / 3 / 3 / 4; z-index: 10; }
+
+        .connector {
+            position: absolute;
+            background-color: #6b7280; /* gray-500 */
+            z-index: 1;
+        }
+        .connector-v { width: 4px; }
+        .connector-h { height: 4px; }
+
+        /* Solid Lines */
+        .connector-v-solid { background-color: #0d9488; /* teal-600 */ }
+        .connector-h-solid { background-color: #0d9488; /* teal-600 */ }
+        
+        /* Dashed Lines */
+        .connector-v-dashed {
+            background-image: linear-gradient(to bottom, #6b7280 50%, transparent 50%);
+            background-size: 4px 10px;
+            background-repeat: repeat-y;
+            width: 4px;
+        }
+        .connector-h-dashed {
+            background-image: linear-gradient(to right, #6b7280 50%, transparent 50%);
+            background-size: 10px 4px;
+            background-repeat: repeat-x;
+            height: 4px;
+        }
+
+        /* Connector positions */
+        .c-top {
+            top: 0;
+            left: 50%;
+            transform: translateX(-50%);
+            height: calc(50% - 40px); /* Adjust 40px to stop before box */
+        }
+        .c-bottom {
+            bottom: 0;
+            left: 50%;
+            transform: translateX(-50%);
+            height: calc(50% - 40px); /* Adjust 40px to stop before box */
+        }
+        .c-left {
+            left: 0;
+            top: 50%;
+            transform: translateY(-50%);
+            width: calc(50% - 60px); /* Adjust 60px to stop before box */
+        }
+        .c-right {
+            right: 0;
+            top: 50%;
+            transform: translateY(-50%);
+            width: calc(50% - 60px); /* Adjust 60px to stop before box */
+        }
     </style>
 </head>
 <body class="bg-gray-50 font-sans text-gray-800">
@@ -49,12 +120,13 @@
         <nav class="container mx-auto px-6 py-4 flex flex-wrap justify-between items-center">
             <h1 class="text-2xl font-bold text-teal-700">PowerSchool Ecosystem Explorer</h1>
             <!-- Navigation Links -->
-            <div class="flex space-x-4 mt-4 md:mt-0">
+            <div class="flex flex-wrap space-x-4 mt-4 md:mt-0">
                 <a href="#home" class="nav-link text-gray-600 hover:text-teal-600">Introduction</a>
                 <a href="#modules" class="nav-link text-gray-600 hover:text-teal-600">Internal Modules</a>
                 <a href="#interconnections" class="nav-link text-gray-600 hover:text-teal-600">Interconnections</a>
                 <a href="#decision" class="nav-link text-gray-600 hover:text-teal-600">Strategic Decision</a>
-                <a href="#report" class="nav-link text-gray-600 hover:text-teal-600">Full Report</a>
+                <a href="#blueprints" class="nav-link text-gray-600 hover:text-teal-600">Ecosystem Blueprints</a>
+                <a href="#interview" class="nav-link text-gray-600 hover:text-teal-600">School Interview</a>
             </div>
         </nav>
     </header>
@@ -271,18 +343,198 @@
             </div>
         </section>
 
-        <!-- Section 5: Full Report Link -->
-        <section id="report" class="mb-16 text-center">
-            <h2 class="text-3xl font-bold text-center text-gray-900 mb-4">Access the Full Research Report</h2>
-            <p class="text-center text-gray-700 max-w-3xl mx-auto mb-8">
-                Click the button below to view the complete research paper, "Analysis of the PowerSchool K-12 Ecosystem."
+        <!-- Section 5: Ecosystem Blueprints -->
+        <section id="blueprints" class="mb-16">
+            <h2 class="text-3xl font-bold text-center text-gray-900 mb-4">Ecosystem Blueprints</h2>
+            <p class="text-center text-gray-700 max-w-3xl mx-auto mb-12">
+                These two models visualize the "All-in-One" vs. "Best-in-Breed" strategies. This helps frame the conversation around how a school's systems are currently (or ideally) connected.
             </p>
-            <a href="uploaded:PowerSchool Modules and Integrations Research.pdf" 
-               target="_blank" 
-               rel="noopener noreferrer"
-               class="inline-block bg-teal-600 text-white font-bold py-3 px-8 rounded-lg shadow-md hover:bg-teal-700 transition-colors duration-300">
-                View Full Report
-            </a>
+
+            <div class="grid grid-cols-1 lg:grid-cols-2 gap-12">
+                
+                <!-- Blueprint 1: All-in-One -->
+                <div class="bg-white p-8 rounded-lg shadow-xl">
+                    <h3 class="text-2xl font-bold text-gray-900 mb-6 text-center">Blueprint 1: The "All-in-One" Model</h3>
+                    <div class="blueprint-grid">
+                        <!-- Connectors -->
+                        <div class="connector connector-v c-top connector-v-solid"></div>
+                        <div class="connector connector-v c-bottom connector-v-solid"></div>
+                        <div class="connector connector-h c-left connector-h-solid"></div>
+                        <div class="connector connector-h c-right connector-h-solid"></div>
+
+                        <!-- Boxes -->
+                        <div class="blueprint-center p-4 bg-teal-700 text-white rounded-lg shadow-md text-center">
+                            <h6 class="text-xs font-bold uppercase tracking-wider text-teal-200">Core SIS</h6>
+                            <h5 class="font-semibold text-lg mt-1">PowerSchool SIS</h5>
+                        </div>
+                        <div class="blueprint-top p-3 bg-teal-100 text-teal-800 rounded-lg shadow-sm text-center">
+                            <h6 class="text-xs font-bold uppercase tracking-wider text-teal-600">Learning Management</h6>
+                            <h5 class="font-semibold text-lg mt-1">Schoology</h5>
+                        </div>
+                        <div class="blueprint-bottom p-3 bg-teal-100 text-teal-800 rounded-lg shadow-sm text-center">
+                            <h6 class="text-xs font-bold uppercase tracking-wider text-teal-600">Financial Operations</h6>
+                            <h5 class="font-semibold text-lg mt-1">eFinancePlus</h5>
+                        </div>
+                        <div class="blueprint-left p-3 bg-teal-100 text-teal-800 rounded-lg shadow-sm text-center">
+                            <h6 class="text-xs font-bold uppercase tracking-wider text-teal-600">Enrollment & Lead Capture</h6>
+                            <h5 class="font-semibold text-lg mt-1">Enrollment</h5>
+                        </div>
+                        <div class="blueprint-right p-3 bg-teal-100 text-teal-800 rounded-lg shadow-sm text-center">
+                            <h6 class="text-xs font-bold uppercase tracking-wider text-teal-600">Talent & HR</h6>
+                            <h5 class="font-semibold text-lg mt-1">Unified Talent</h5>
+                        </div>
+                    </div>
+                    <p class="text-center text-gray-600 mt-6">
+                        <strong class="text-gray-700">Key:</strong> Green lines represent deep, native integration. Data flow is (in theory) seamless and real-time within a single vendor's "walled garden."
+                    </p>
+                </div>
+
+                <!-- Blueprint 2: Best-in-Breed -->
+                <div class="bg-white p-8 rounded-lg shadow-xl">
+                    <h3 class="text-2xl font-bold text-gray-900 mb-6 text-center">Blueprint 2: The "Best-in-Breed" Model</h3>
+                    <div class="blueprint-grid">
+                        <!-- Connectors -->
+                        <div class="connector connector-v c-top connector-v-dashed"></div>
+                        <div class="connector connector-v c-bottom connector-v-dashed"></div>
+                        <div class="connector connector-h c-left connector-h-dashed"></div>
+                        <div class="connector connector-h c-right connector-h-dashed"></div>
+                        
+                        <!-- Boxes -->
+                        <div class="blueprint-center p-4 bg-teal-700 text-white rounded-lg shadow-md text-center">
+                            <h6 class="text-xs font-bold uppercase tracking-wider text-teal-200">Core SIS</h6>
+                            <h5 class="font-semibold text-lg mt-1">PowerSchool SIS</h5>
+                        </div>
+                        <div class="blueprint-top p-3 bg-gray-200 text-gray-800 rounded-lg shadow-sm text-center">
+                            <h6 class="text-xs font-bold uppercase tracking-wider text-gray-600">Learning Management</h6>
+                            <h5 class="font-semibold text-lg mt-1">Canvas</h5>
+                        </div>
+                        <div class="blueprint-bottom p-3 bg-gray-200 text-gray-800 rounded-lg shadow-sm text-center">
+                            <h6 class="text-xs font-bold uppercase tracking-wider text-gray-600">Financial Operations</h6>
+                            <h5 class="font-semibold text-lg mt-1">FACTS</h5>
+                        </div>
+                        <div class="blueprint-left p-3 bg-gray-200 text-gray-800 rounded-lg shadow-sm text-center">
+                            <h6 class="text-xs font-bold uppercase tracking-wider text-gray-600">Enrollment & Lead Capture</h6>
+                            <h5 class="font-semibold text-lg mt-1">Finalsite</h5>
+                        </div>
+                        <div class="blueprint-right p-3 bg-gray-200 text-gray-800 rounded-lg shadow-sm text-center">
+                            <h6 class="text-xs font-bold uppercase tracking-wider text-gray-600">Talent & HR</h6>
+                            <h5 class="font-semibold text-lg mt-1">Workday</h5>
+                        </div>
+                    </div>
+                    <p class="text-center text-gray-600 mt-6">
+                        <strong class="text-gray-700">Key:</strong> Gray lines represent API connections. Data is synced (e.g., nightly or hourly), not real-time. This model prioritizes specialized features over a single unified system.
+                    </p>
+                </div>
+            </div>
+        </section>
+
+        <!-- Section 6: School Interview Notes -->
+        <section id="interview" class="mb-16">
+            <h2 class="text-3xl font-bold text-center text-gray-900 mb-4">School Ecosystem Interview Notes</h2>
+            <p class="text-center text-gray-700 max-w-3xl mx-auto mb-12">
+                Use this section to capture feedback directly from the school you are interviewing. Fill in the details for each functional category to map out their current technology footprint, ownership, and costs.
+            </p>
+
+            <div class="bg-white p-8 rounded-lg shadow-xl max-w-4xl mx-auto">
+                <form id="interviewForm" class="space-y-8">
+                    
+                    <!-- Core SIS -->
+                    <div class="p-6 border border-gray-200 rounded-lg">
+                        <h3 class="text-2xl font-semibold text-teal-700 mb-4">1. Core SIS</h3>
+                        <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+                            <div>
+                                <label for="sis_app" class="block text-sm font-medium text-gray-700">Application Used</label>
+                                <input type="text" name="sis_app" id="sis_app" placeholder="e.g., PowerSchool SIS" class="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-teal-500 focus:border-teal-500">
+                            </div>
+                            <div>
+                                <label for="sis_owners" class="block text-sm font-medium text-gray-700"># of Owners / Admins</label>
+                                <input type="number" name="sis_owners" id="sis_owners" placeholder="e.g., 2" class="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-teal-500 focus:border-teal-500">
+                            </div>
+                            <div>
+                                <label for="sis_cost" class="block text-sm font-medium text-gray-700">Est. Annual Cost</label>
+                                <input type="text" name="sis_cost" id="sis_cost" placeholder="e.g., $50,000" class="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-teal-500 focus:border-teal-500">
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Learning Management -->
+                    <div class="p-6 border border-gray-200 rounded-lg">
+                        <h3 class="text-2xl font-semibold text-teal-700 mb-4">2. Learning Management</h3>
+                        <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+                            <div>
+                                <label for="lms_app" class="block text-sm font-medium text-gray-700">Application Used</label>
+                                <input type="text" name="lms_app" id="lms_app" placeholder="e.g., Schoology, Canvas" class="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-teal-500 focus:border-teal-500">
+                            </div>
+                            <div>
+                                <label for="lms_owners" class="block text-sm font-medium text-gray-700"># of Owners / Admins</label>
+                                <input type="number" name="lms_owners" id="lms_owners" placeholder="e.g., 1" class="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-teal-500 focus:border-teal-500">
+                            </div>
+                            <div>
+                                <label for="lms_cost" class="block text-sm font-medium text-gray-700">Est. Annual Cost</label>
+                                <input type="text" name="lms_cost" id="lms_cost" placeholder="e.g., $15,000" class="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-teal-500 focus:border-teal-500">
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Financial Operations -->
+                    <div class="p-6 border border-gray-200 rounded-lg">
+                        <h3 class="text-2xl font-semibold text-teal-700 mb-4">3. Financial Operations</h3>
+                        <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+                            <div>
+                                <label for="finance_app" class="block text-sm font-medium text-gray-700">Application Used</label>
+                                <input type="text" name="finance_app" id="finance_app" placeholder="e.g., FACTS, eFinancePlus" class="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-teal-500 focus:border-teal-500">
+                            </div>
+                            <div>
+                                <label for="finance_owners" class="block text-sm font-medium text-gray-700"># of Owners / Admins</label>
+                                <input type="number" name="finance_owners" id="finance_owners" placeholder="e.g., 3" class="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-teal-500 focus:border-teal-500">
+                            </div>
+                            <div>
+                                <label for="finance_cost" class="block text-sm font-medium text-gray-700">Est. Annual Cost</label>
+                                <input type="text" name="finance_cost" id="finance_cost" placeholder="e.g., $20,000" class="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-teal-500 focus:border-teal-500">
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Enrollment & Lead Capture -->
+                    <div class="p-6 border border-gray-200 rounded-lg">
+                        <h3 class="text-2xl font-semibold text-teal-700 mb-4">4. Enrollment & Lead Capture</h3>
+                        <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+                            <div>
+                                <label for="enroll_app" class="block text-sm font-medium text-gray-700">Application Used</label>
+                                <input type="text" name="enroll_app" id="enroll_app" placeholder="e.g., Finalsite, PS Enrollment" class="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-teal-500 focus:border-teal-500">
+                            </div>
+                            <div>
+                                <label for="enroll_owners" class="block text-sm font-medium text-gray-700"># of Owners / Admins</label>
+                                <input type="number" name="enroll_owners" id="enroll_owners" placeholder="e.g., 1" class="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-teal-500 focus:border-teal-500">
+                            </div>
+                            <div>
+                                <label for="enroll_cost" class="block text-sm font-medium text-gray-700">Est. Annual Cost</label>
+                                <input type="text" name="enroll_cost" id="enroll_cost" placeholder="e.g., $18,000" class="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-teal-500 focus:border-teal-500">
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Talent & HR -->
+                    <div class="p-6 border border-gray-200 rounded-lg">
+                        <h3 class="text-2xl font-semibold text-teal-700 mb-4">5. Talent & HR</h3>
+                        <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+                            <div>
+                                <label for="hr_app" class="block text-sm font-medium text-gray-700">Application Used</label>
+                                <input type="text" name="hr_app" id="hr_app" placeholder="e.g., Workday, Unified Talent" class="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-teal-500 focus:border-teal-500">
+                            </div>
+                            <div>
+                                <label for="hr_owners" class="block text-sm font-medium text-gray-700"># of Owners / Admins</label>
+                                <input type="number" name="hr_owners" id="hr_owners" placeholder="e.g., 2" class="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-teal-500 focus:border-teal-500">
+                            </div>
+                            <div>
+                                <label for="hr_cost" class="block text-sm font-medium text-gray-700">Est. Annual Cost</label>
+                                <input type="text" name="hr_cost" id="hr_cost" placeholder="e.g., $25,000" class="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-teal-500 focus:border-teal-500">
+                            </div>
+                        </div>
+                    </div>
+
+                </form>
+            </div>
         </section>
 
     </main>
